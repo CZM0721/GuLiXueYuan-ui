@@ -109,9 +109,10 @@ export default {
             this.$message.success("添加成功")
             course.saveCoursec(this.courseInfo).then(res => {
                 console.log(res);
+                console.log(res.data.id)
                 this.$message.success("添加成功")
+                this.$router.push({ path: '/course/chapter/'+res.data.id})
             })
-            this.$router.push({ path: '/course/chapter/1' })
         },
 
         // 根据一级分类查找二级分类

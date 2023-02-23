@@ -4,7 +4,7 @@ export default{
     // 获取课程树
     getSubjectTree() {
         return request({
-            url: `/eduservice/subject/getSubjectTree`,
+            url: `/eduservice/subject/getTree`,
             method: 'get',
           })
     },
