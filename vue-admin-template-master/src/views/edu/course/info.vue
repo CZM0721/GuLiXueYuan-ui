@@ -87,6 +87,11 @@ export default {
         }
     },
     created() {
+
+        if(this.$route.params.id){
+            this.getCourseInfo(this.$route.params.id)
+        }
+
         // 获取讲师数据
         teacher.getAllTeacher().then(res => {
             if (res.data.items) {
@@ -103,16 +108,32 @@ export default {
     },
     methods: {
 
-        // 保存课程基本信息
-        saveOrUpdata() {
-            console.log(this.courseInfo);
-            this.$message.success("添加成功")
-            course.saveCoursec(this.courseInfo).then(res => {
+        // 获取课程基本信息
+        getCourseInfo(id){
+            course.getCourseInfo(id).then(res => {
                 console.log(res);
-                console.log(res.data.id)
-                this.$message.success("添加成功")
-                this.$router.push({ path: '/course/chapter/'+res.data.id})
+                this.courseInfo = res.data.data
+                this.courseInfo.courseId = id 
+                subject.getSubjectByParentId(this.courseInfo.subjectParentId).then(res => {
+                    this.twoClassifyData = res.data.data
+                })
             })
+        },
+
+        // 保存或修改课程基本信息
+        saveOrUpdata() {
+            if(this.courseInfo.courseId){
+                course.updateCoursec(this.courseInfo).then(res => {
+                    this.$message.success("保存成功")
+                    this.$router.push({ path: '/course/chapter/'+this.courseInfo.courseId})
+                })
+            }else{
+                course.saveCoursec(this.courseInfo).then(res => {
+                    console.log(res);
+                    this.$message.success("保存成功")
+                    this.$router.push({ path: '/course/chapter/'+res.data.id})
+                })
+            }
         },
 
         // 根据一级分类查找二级分类

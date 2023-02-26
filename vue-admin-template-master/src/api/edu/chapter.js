@@ -9,12 +9,20 @@ export default{
           })
     },
 
-    // 添加章节
-    addChapter(data) {
+    // 添加或修改章节
+    addOrUpdateChapter(data) {
         return request({
             url: `/eduservice/edu-chapter/addOrUpdateChapter`,
             method: 'post',
             data: data,
+          })
+    },
+
+    // 删除章节
+    delChapter(id) {
+        return request({
+            url: `/eduservice/edu-chapter/delChapter/${id}`,
+            method: 'delete',
           })
     },
 }
