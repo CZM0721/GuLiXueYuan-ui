@@ -26,4 +26,21 @@ export default{
             data:obj,
         })
     },
+
+    deleteCourse(obj) {
+        return request({
+            url: `/eduservice/course/deleteCourse`,
+            method: 'delete',
+            data:obj,
+        })
+    },
+
+    // 获取课程列表信息
+    getCourseInfoList(obj) {
+        return request({
+            url: `/eduservice/course/getCourseInfo`,
+            method: 'post',
+            params: obj
+          })
+    },
 }

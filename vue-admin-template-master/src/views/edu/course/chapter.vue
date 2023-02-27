@@ -274,10 +274,12 @@ export default {
             console.log('previous')
             this.$router.push({ path: '/course/info/'+this.$route.params.id })
         },
+
         next() {
             console.log('next')
             this.$router.push({ path: '/course/publish/'+this.$route.params.id })
         },
+        
         filterNode(value, data) {
             if (!value) return true;
             return data.label.indexOf(value) !== -1;
